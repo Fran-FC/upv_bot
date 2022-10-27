@@ -106,7 +106,7 @@ for hour in list_of_hours:
             headers=reserva_headers)
         print(resp)
     else:
-        print("ERR: Hour selected is empty!!")
+        print("ERROR: Hour selected is not available!!")
 
 
 
