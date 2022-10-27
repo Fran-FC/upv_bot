@@ -1,0 +1,99 @@
+--------------------
+request login
+--------------------
+POST /pls/soalu/est_aute.intraalucomp HTTP/1.1
+"Host": "intranet.upv.es",
+"User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0",
+"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+"Accept-Language": "es-ES,en-US;q=0.7,en;q=0.3",
+"Accept-Encoding": "gzip, deflate, br",
+"Content-Type": "application/x-www-form-urlencoded",
+"Content-Length": "62",
+"Origin": "https://intranet.upv.es",
+"DNT": "1",
+"Connection": "keep-alive",
+"Referer": "https://intranet.upv.es/pls/soalu/est_intranet.NI_Portal_n?p_idioma=c",
+"Cookie": "mop=I; JS=1; T=foto2; AMFParams=dummy,false,false,false,false,true,linux,nc,firefox,106.0; AMFDetect=true; pintranet=; fotoprof=; accesible=HighContrast; iacclarge=; UPV_DEBUG=T=foto2,pintranet,fotoprof,accesible,iacclarge",
+"Upgrade-Insecure-Requests": "1",
+"Sec-Fetch-Dest": "document",
+"Sec-Fetch-Mode": "navigate",
+"Sec-Fetch-Site": "same-origin",
+"Sec-Fetch-User": "?1",
+
+response
+---------
+HTTP/1.1 302 Found
+"Date": "Wed, 26 Oct 2022 20:18:47 GMT",
+"Server": "Oracle-HTTP-Server-12c",
+"Strict-Transport-Security": "max-age=63072000; includeSubdomains;",
+"Location": "https://intranet.upv.es/pls/soalu/sic_menu.MiUPV?P_IDIOMA=c&P_MODO=alumno",
+"Window-target": "_top",
+"Content-Length": "0",
+"Content-Type": "text/html; charset=ISO-8859-15",
+"Content-Language": "es",
+"Set-Cookie": "TDp=18415f28ab9.140d9530f3;path=/;domain=.upv.es",
+"X-UA-Compatible": "IE=EmulateIE7, IE=11",
+"Connection": "close",
+
+-------------------
+request musculacion
+-------------------
+GET /pls/soalu/sic_depact.HSemActividades?p_campus=V&p_tipoact=6607&p_codacti=20705&p_vista=intranet&p_idioma=c&p_solo_matricula_sn=&p_anc=filtro_actividad HTTP/1.1
+"Host": "intranet.upv.es",
+"User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0",
+"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+"Accept-Language": "es-ES,en-US;q=0.7,en;q=0.3",
+"Accept-Encoding": "gzip, deflate, br",
+"DNT": "1",
+"Connection": "keep-alive",
+"Cookie": "JS=1; T=foto2; AMFParams=dummy,false,false,false,false,true,linux,nc,firefox,106.0; AMFDetect=true; pintranet=; fotoprof=; accesible=HighContrast; iacclarge=; UPV_DEBUG=T=foto2,pintranet,fotoprof,accesible,iacclarge; TDp=18415f28ab9.140d9530f3",
+"Upgrade-Insecure-Requests": "1",
+"Sec-Fetch-Dest": "document",
+"Sec-Fetch-Mode": "navigate",
+"Sec-Fetch-Site": "none",
+"Sec-Fetch-User": "?1",
+
+response
+---------
+HTTP/1.1 200 OK
+"Date": "Wed, 26 Oct 2022 20:20:39 GMT",
+"Server": "Oracle-HTTP-Server-12c",
+"Strict-Transport-Security": "max-age=63072000; includeSubdomains;",
+"Content-Length": "25312",
+"Content-Type": "text/html; charset=ISO-8859-15",
+"Content-Language": "es",
+"X-UA-Compatible": "IE=EmulateIE7, IE=11",
+"Connection": "close",
+
+
+----------------------
+request select activity
+----------------------
+GET /pls/soalu/sic_depact.HSemActMatri?p_campus=V&p_codacti=20705&p_codgrupo_mat=47D6EB22C64693&p_vista=intranet&p_tipoact=6607&p_idioma=c HTTP/1.1
+"Host": "intranet.upv.es",
+"User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0",
+"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+"Accept-Language": "es-ES,en-US;q=0.7,en;q=0.3",
+"Accept-Encoding": "gzip, deflate, br",
+"DNT": "1",
+"Connection": "keep-alive",
+"Referer": "https://intranet.upv.es/pls/soalu/sic_depact.HSemActividades?p_campus=V&p_codacti=20705&p_vista=intranet&p_idioma=c&p_tipoact=6607&p_solo_matricula_sn=&p_anc=bloque_inscritas",
+"Cookie": "JS=1; T=foto2; AMFParams=dummy,false,false,false,false,true,linux,nc,firefox,106.0; AMFDetect=true; pintranet=; fotoprof=; accesible=HighContrast; iacclarge=; UPV_DEBUG=T=foto2,pintranet,fotoprof,accesible,iacclarge; TDp=18415f28ab9.140d9530f3",
+"Upgrade-Insecure-Requests": "1",
+"Sec-Fetch-Dest": "document",
+"Sec-Fetch-Mode": "navigate",
+"Sec-Fetch-Site": "same-origin",
+"Sec-Fetch-User": "?1",
+
+response
+--------
+HTTP/1.1 302 Found
+"Date": "Wed, 26 Oct 2022 20:24:39 GMT",
+"Server": "Oracle-HTTP-Server-12c",
+"Strict-Transport-Security": "max-age=63072000; includeSubdomains;",
+"Location": "sic_depact.HSemActividades?p_campus=V&p_codacti=20705&p_vista=intranet&p_idioma=c&p_tipoact=6607&p_solo_matricula_sn=&p_anc=bloque_inscritas",
+"Content-Length": "0",
+"Content-Type": "text/plain; charset=iso-8859-1",
+"Content-Language": "es",
+"X-UA-Compatible": "IE=EmulateIE7, IE=11",
+"Connection": "close",
