@@ -14,8 +14,12 @@ data = {
 }
 
 list_of_hours = [
-    [(9,4), False],
-    [(0,0), False]
+    [(1,0), False],
+    [(2,0), False],
+    [(10,2), False],
+    [(11,2), False],
+    [(11,3), False],
+    [(12,3), False]
 ]
 
 resp = requests.post("https://intranet.upv.es/pls/soalu/est_aute.intraalucomp", headers={
