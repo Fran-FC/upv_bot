@@ -22,6 +22,9 @@ list_of_hours = [
     [(12,3), False]
 ]
 
+cookie_base = "mop=I; JS=1; T=foto2; AMFParams=dummy,false,false,false,false,true,linux,nc,firefox,106.0; \
+    AMFDetect=true; pintranet=; fotoprof=; accesible=HighContrast; iacclarge=; UPV_DEBUG=T=foto2,pintranet,fotoprof,accesible,iacclarge"
+
 resp = requests.post("https://intranet.upv.es/pls/soalu/est_aute.intraalucomp", headers={
         "Host": "intranet.upv.es",
         "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0",
@@ -42,6 +45,12 @@ resp = requests.post("https://intranet.upv.es/pls/soalu/est_aute.intraalucomp", 
         "Sec-Fetch-User": "?1"
     }, data=data)
 
+index = resp.headers["Set-Cookie"].find(";")
+cookie = cookie_base
+# cookie = "{0}; {1}".format(cookie_base[7:], resp.headers["Set-Cookie"][:index])
+print("Set-Cookie: {}".format(resp.headers["Set-Cookie"]))
+print("Cookie: {}".format(cookie))
+
 hours_booked = False
 while not hours_booked:
     resp = requests.get(
@@ -54,7 +63,7 @@ while not hours_booked:
             "Accept-Encoding": "gzip, deflate, br",
             "DNT": "1",
             "Connection": "keep-alive",
-            "Cookie": "JS=1; T=foto2; AMFParams=dummy,false,false,false,false,true,linux,nc,firefox,106.0; AMFDetect=true; pintranet=; fotoprof=; accesible=HighContrast; iacclarge=; UPV_DEBUG=T=foto2,pintranet,fotoprof,accesible,iacclarge; TDp=18415f28ab9.140d9530f3",
+            "Cookie": "JS=1; T=foto2; AMFParams=dummy,false,false,false,false,true,linux,nc,firefox,106.0; AMFDetect=true; pintranet=; fotoprof=; accesible=HighContrast; iacclarge=; UPV_DEBUG=T=foto2,pintranet,fotoprof,accesible,iacclarge; TDp=184231c27bb.140d9530f3",
             "Upgrade-Insecure-Requests": "1",
             "Sec-Fetch-Dest": "document",
             "Sec-Fetch-Mode": "navigate",
@@ -64,8 +73,8 @@ while not hours_booked:
 
     soup = BeautifulSoup(resp.content, "html.parser")
     tables = soup.find_all('table', class_="upv_listacolumnas")
-    rows = tables[1].select("tbody tr")
-
+    rows = tables[0].select("tbody tr")
+    print(rows)
     matrix = [['' for _ in range(5)] for _ in range(14)]
 
     j = 0
@@ -94,7 +103,7 @@ while not hours_booked:
             "DNT": "1",
             "Connection": "keep-alive",
             "Referer": "https://intranet.upv.es/pls/soalu/sic_depact.HSemActividades?p_campus=V&p_codacti=20705&p_vista=intranet&p_idioma=c&p_tipoact=6607&p_solo_matricula_sn=&p_anc=bloque_inscritas",
-            "Cookie": "JS=1; T=foto2; AMFParams=dummy,false,false,false,false,true,linux,nc,firefox,106.0; AMFDetect=true; pintranet=; fotoprof=; accesible=HighContrast; iacclarge=; UPV_DEBUG=T=foto2,pintranet,fotoprof,accesible,iacclarge; TDp=18415f28ab9.140d9530f3",
+            "Cookie": cookie,
             "Upgrade-Insecure-Requests": "1",
             "Sec-Fetch-Dest": "document",
             "Sec-Fetch-Mode": "navigate",
