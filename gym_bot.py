@@ -33,7 +33,7 @@ def main():
         with open("credentials.yml", "r") as fd:
             credentials = yaml.safe_load(fd)
             data["dni"] = credentials["dni"]
-            data["clau"] = credential["pin"]
+            data["clau"] = credentials["pin"]
 
         logging.info(data)
 
