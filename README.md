@@ -6,7 +6,11 @@ To execute this every Saturday at 10:00 AM periodically put it in your crontab f
 ```
 Being $WORK_DIR the path of the repo.
 
-Put your credentials in $WORK_DIR/cred file, DNI in first line and PIN in the second line.
+Put your credentials in a new file called $WORK_DIR/credentials.yml file and with this format:
+```yaml
+dni: 00000000
+pin: 0000
+```
 
 
 
