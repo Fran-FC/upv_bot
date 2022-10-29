@@ -1,9 +1,9 @@
-from cmath import log
 from requests_html import HTMLSession
 import random
 import time
 from bs4 import BeautifulSoup
 import logging
+import yaml
 
 list_of_hours = [
     [(1,0),     True],
@@ -30,9 +30,10 @@ reserva_url = "https://intranet.upv.es/pls/soalu/sic_depact.HSemActMatri?p_campu
 
 def main():
     while(1):
-        with open("cred") as fd:
-            data["dni"] = str(fd.readline()).removesuffix("\n")
-            data["clau"] = str(fd.readline())
+        with open("credentials.yml", "r") as fd:
+            credentials = yaml.safe_load(fd)
+            data["dni"] = credentials["dni"]
+            data["clau"] = credential["pin"]
 
         logging.info(data)
 
