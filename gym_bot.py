@@ -73,6 +73,8 @@ def main():
                     if index != -1:
                         cod = str(day)[index+15:index+29]
                         matrix[j][i] = cod
+                        logging.info("Session ({0},{1}) available".format(j,i))
+                        
                     i += 1
                 j += 1
                     
@@ -88,15 +90,15 @@ def main():
                                 hours_booked = False
                                 logging.error("Status code not accepted")
                                 continue
-                            logging.info("Hour {} booked".format(hour[0]))
+                            logging.info("Session {} booked".format(hour[0]))
                         except:
-                            logging.error("Exception requesting hour {}".format(hour[0]))
+                            logging.error("Exception requesting session {}".format(hour[0]))
                             hours_booked = False
                             continue
                         hour[1] = True
                     else:
                         hours_booked = False
-                        logging.warning("Hour {} selected is empty!!".format(hour[0]))
+                        logging.warning("Session {} is not available!".format(hour[0]))
 
             rand_time = random.random() * 10 + 5
             logging.info("Sleeping %.2f seconds" % rand_time)
