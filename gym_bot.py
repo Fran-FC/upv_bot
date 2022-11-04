@@ -6,12 +6,12 @@ import logging
 import yaml
 
 list_of_hours = [
-    [(1,0),     True],
-    [(2,0),     True],
-    [(10,2),    True],
-    [(12,2),    False],
-    [(12,3),    False],
-    [(13,3),    True]
+    [(12,0), False],
+    [(13,0), False],
+    [(11,2), False],
+    [(12,2), False],
+    [(11,3), False],
+    [(12,3), False]
 ]
 
 data = {
