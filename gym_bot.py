@@ -48,11 +48,13 @@ def main():
         if r.status_code != 200:
             logging.error("Authentication error")
             continue
+        logging.debug("Authenticated")
 
         r = session.get("https://intranet.upv.es/pls/soalu/sic_depact.HSemActividades?p_campus=V&p_tipoact=6607&p_codacti=20705&p_vista=intranet&p_idioma=c&p_solo_matricula_sn=&p_anc=filtro_actividad")
         if r.status_code != 200:
             logging.error("Authentication error")
             continue
+        logging.debug("List of activities retrieved")
 
         soup = BeautifulSoup(r.content, "html.parser")
         tables = soup.find_all('table', class_="upv_listacolumnas")
@@ -88,17 +90,17 @@ def main():
             if not hour[1]:
                 code_hour = matrix[hour[0][0]][hour[0][1]] 
                 if code_hour != '': 
-                    # try:
-                    resp = session.get(reserva_url.format(code_hour))
-                    if resp.status_code != 200:
+                    try:
+                        resp = session.get(reserva_url.format(code_hour))
+                        if resp.status_code != 200:
+                            hours_booked = False
+                            logging.error("Status code not accepted")
+                            continue
+                        logging.info("Session {} booked".format(hour[0]))
+                    except:
+                        logging.error("Exception requesting session {}".format(hour[0]))
                         hours_booked = False
-                        logging.error("Status code not accepted")
                         continue
-                    logging.info("Session {} booked".format(hour[0]))
-                    # except:
-                    #     logging.error("Exception requesting session {}".format(hour[0]))
-                    #     hours_booked = False
-                    #     continue
                     hour[1] = True
                 else:
                     hours_booked = False
