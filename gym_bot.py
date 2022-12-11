@@ -4,17 +4,10 @@ import time
 from bs4 import BeautifulSoup
 import logging
 import yaml
-
+import argparse
 
 def main():
-    list_of_hours = [
-        [(12,0), False],
-        [(13,0), False],
-        [(11,2), False],
-        [(12,2), False],
-        [(11,3), False],
-        [(12,3), False]
-    ]
+    list_of_hours = []
 
     data = {
         "id": "c",
@@ -26,18 +19,33 @@ def main():
         "clau": ""
     }
 
-    logging.basicConfig(filename='bot.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s') 
+    time_delay_base = 5
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config", default="config/config.yml", help="Pass configuration filename")
+
+    opts = parser.parse_args() 
+
+    # read config file and store values
+    with open(opts.config, "r") as fd:
+        config = yaml.safe_load(fd)
+
+        data["dni"] = config["dni"]
+        data["clau"] = config["pin"]
+    
+        time_delay_base = config["time_delay"]
+
+        for h in config["hours"]:
+            list_of_hours.append([h, False])
+
+        logging.basicConfig(filename=config["log_file"], level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s') 
 
     reserva_url = "https://intranet.upv.es/pls/soalu/sic_depact.HSemActMatri?p_campus=V&p_codacti=20705&p_codgrupo_mat={0}&p_vista=intranet&p_tipoact=6607&p_idioma=c"
+
 
     session = None
     hours_booked = False
     while(not hours_booked):
-        with open("credentials.yml", "r") as fd:
-            credentials = yaml.safe_load(fd)
-            data["dni"] = credentials["dni"]
-            data["clau"] = credentials["pin"]
-
         logging.info(data)
 
         if session:
@@ -82,7 +90,6 @@ def main():
                     
                 i += 1
             j += 1
-                
 
         
         hours_booked = True
@@ -106,9 +113,13 @@ def main():
                     hours_booked = False
                     logging.warning("Session {} is not available!".format(hour[0]))
 
-        rand_time = random.random() * 10 + 5
+        logging.info("All hours booked: {}".format(hours_booked))
+        rand_time = random.random() * 10 + time_delay_base
         logging.info("Sleeping %.2f seconds" % rand_time)
         time.sleep(rand_time)
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        logging.info("Exception in main(): {}".format(e))

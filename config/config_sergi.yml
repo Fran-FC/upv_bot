@@ -1,0 +1,8 @@
+dni: 21808638
+pin: 8983
+hours:
+    - [11,2]
+    - [12,2]
+    - [13,2]
+log_file: 'sergi_bot.log'
+time_delay: 15

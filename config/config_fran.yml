@@ -1,0 +1,8 @@
+dni: 21699594
+pin: 4241
+hours:
+    - [11,2]
+    - [12,2]
+    - [13,2]
+log_file: 'bot.log'
+time_delay: 5
