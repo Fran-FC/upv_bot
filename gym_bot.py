@@ -52,13 +52,25 @@ def main():
             session.close()
         session = HTMLSession()
 
-        r = session.post("https://intranet.upv.es/pls/soalu/est_aute.intraalucomp",data=data)
+        try:
+            r = session.post("https://intranet.upv.es/pls/soalu/est_aute.intraalucomp",data=data)
+        except Exception as e:
+            logging.error("POST authentication error {}".format(e))
+            time.sleep(1)
+            continue
+
         if r.status_code != 200:
             logging.error("Authentication error")
             continue
         logging.debug("Authenticated")
 
-        r = session.get("https://intranet.upv.es/pls/soalu/sic_depact.HSemActividades?p_campus=V&p_tipoact=6607&p_codacti=20705&p_vista=intranet&p_idioma=c&p_solo_matricula_sn=&p_anc=filtro_actividad")
+        try:
+            r = session.get("https://intranet.upv.es/pls/soalu/sic_depact.HSemActividades?p_campus=V&p_tipoact=6607&p_codacti=20705&p_vista=intranet&p_idioma=c&p_solo_matricula_sn=&p_anc=filtro_actividad")
+        except Exception as e:
+            logging.error("request of activities error {}".format(e))
+            time.sleep(1)
+            continue
+
         if r.status_code != 200:
             logging.error("Authentication error")
             continue
